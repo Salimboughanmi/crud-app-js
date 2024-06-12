@@ -22,5 +22,67 @@ input{
 outline: none;
 border: none;
 background: #111;
-margin: 4px;
+margin: 4px 0 ;
+border-radius: 4px;
+padding: 4px;
+color: #fff;
 }
+input:focus{
+background: #000;
+transform: scale(1.1);
+}
+.price{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; /* Ajuste l'espacement entre les éléments */
+    align-items: center; /* Aligne les éléments au centre verticalement */
+}
+
+.price input {
+    width: 20%;
+    box-sizing: border-box; /* Pour inclure le padding et la bordure dans la largeur totale */
+}
+
+#total{
+    background: #d80d0d;
+    padding: 4px 2px;
+    border-radius: 4px;
+    
+}
+#total::before{
+    content: 'total:';
+}
+button{
+    width: 100%;
+    height: 30px;
+    border: none;
+    cursor: pointer;
+    background: #200486;
+    color: #fff;
+    border-radius: 20px;
+    transition: 0.5s;
+    margin: 5px;
+}
+
+button:hover{
+    background: #785bdf;
+    letter-spacing: 1px;
+}
+.btnSearch{
+    display: flex;
+    justify-content: space-between;
+}
+.btnSearch button{
+    width: 45%;
+}
+table{
+    width: 100%;
+    text-align: center;
+    margin: 10 0 ;
+}
+table th{
+    text-transform: uppercase;
+}
+
+th , td{padding: 5px;}
