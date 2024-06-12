@@ -44,11 +44,21 @@ submit.onclick = function(){
         dataProduct.push(newProduct)
         console.log(dataProduct)
         localStorage.setItem('product',JSON.stringify(dataProduct))
+        clearInputs()
 }
  
 // clear inputs
 
-
+function clearInputs() {
+    title.value = ''
+    price.value = ''
+    taxes.value = ''
+    ads.value = ''
+    discount.value = ''
+    total.innerHTML = ''
+    count.value = ''
+    category.value = ''
+}
 
 
 
