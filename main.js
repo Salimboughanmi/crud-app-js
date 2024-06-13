@@ -22,13 +22,14 @@ else{
 
 // create product
 
-let dataProduct 
-if (localStorage.product !='' ) { // ou localStorage.length > 0
+
+  let dataProduct ;
+ if (localStorage.product !=null ) { // ou localStorage.length > 0
     dataProduct = JSON.parse(localStorage.product) // ou localStorage.getItem('product') 
     console.log(dataProduct)    
 }else{
-    dataProduct=[]
-}
+    dataProduct= []
+}  
 submit.onclick = function(){
     let newProduct ={
         title: title.value,
@@ -63,7 +64,7 @@ function clearInputs() {
 
 // read product
 
-function showData() {
+ function showData() {
 let table =''
 for (let i = 0; i < dataProduct.length; i++) {
   table += `<tr>
@@ -75,13 +76,22 @@ for (let i = 0; i < dataProduct.length; i++) {
               <td>${dataProduct[i].discount}</td>
               <td>${dataProduct[i].total}</td>
               <td>${dataProduct[i].category}</td>
-              <td><button id="update">update</button></td>
-              <td><button id="delete">delete</button></td>
+              <td><button  id="update">update</button></td>
+              <td><button onclick="deletData(${i})" id="delete">delete</button></td>
             </tr>`
 
         }
         document.getElementById('tbody').innerHTML = table;
 
     }
+ showData();
+    
 
-       
+//delete product
+   
+      function deletData(i){
+        dataProduct.splice(i,1)
+        localStorage.product = JSON.stringify(dataProduct)
+       showData()
+       } 
+    
