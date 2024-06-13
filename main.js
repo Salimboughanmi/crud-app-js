@@ -84,7 +84,7 @@ for (let i = 0; i < dataProduct.length; i++) {
         document.getElementById('tbody').innerHTML = table;
        let deleteall = document.getElementById('deleteall')
         if (dataProduct.length > 0) {
-    deleteall.innerHTML = ` <button onclick="deleteAll()">  delete allll</button>`
+    deleteall.innerHTML = ` <button onclick="deleteAll()">  delete All </button>`
             
         } else{
             deleteall.innerHTML = ''
@@ -106,4 +106,7 @@ for (let i = 0; i < dataProduct.length; i++) {
 
     function deleteAll(){
         localStorage.clear()
+        dataProduct.splice(0)
+        showData()
+
     }
