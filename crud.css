@@ -86,3 +86,7 @@ table th{
 }
 
 th , td{padding: 5px;}
+
+#deleteall{
+    margin: 20px 0 ;
+}
