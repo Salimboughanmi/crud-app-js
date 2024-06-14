@@ -5,6 +5,7 @@ let ads = document.getElementById('ads');
 let discount = document.getElementById('discount');
 let total = document.getElementById('total');
 let category = document.getElementById('category');
+let count = document.getElementById('count');
 let submit = document.getElementById('submit');
 let search = document.getElementById('search');
 //get totale
@@ -41,8 +42,17 @@ submit.onclick = function(){
         count: count.value,
         category: category.value
         }
-        dataProduct.push(newProduct)
-        console.log(dataProduct)
+        if (newProduct.count > 1) {
+            for (let i = 0; i < newProduct.count ; i++) {
+                dataProduct.push(newProduct)      
+            }
+
+        }else {
+            dataProduct.push(newProduct)
+        }
+        
+        
+       // console.log(dataProduct)
         localStorage.setItem('product',JSON.stringify(dataProduct))
         clearInputs()
         showData()
@@ -84,7 +94,7 @@ for (let i = 0; i < dataProduct.length; i++) {
         document.getElementById('tbody').innerHTML = table;
        let deleteall = document.getElementById('deleteall')
         if (dataProduct.length > 0) {
-    deleteall.innerHTML = ` <button onclick="deleteAll()">  delete All </button>`
+    deleteall.innerHTML = ` <button onclick="deleteAll() ">  delete All (${dataProduct.length})</button>`
             
         } else{
             deleteall.innerHTML = ''
@@ -107,6 +117,12 @@ for (let i = 0; i < dataProduct.length; i++) {
     function deleteAll(){
         localStorage.clear()
         dataProduct.splice(0)
+        //localStorage.product = JSON.stringify(dataProduct)
+
         showData()
 
     }
+
+    // count product
+
+    
