@@ -32,44 +32,49 @@ else{
   let dataProduct ;
  if (localStorage.product !=null ) { // ou localStorage.length > 0
     dataProduct = JSON.parse(localStorage.product) // ou localStorage.getItem('product') 
-    console.log(dataProduct)    
 }else{
     dataProduct= []
 }  
 submit.onclick = function(){
     let newProduct ={
-        title: title.value,
+        title: title.value.toLowerCase(),
         price: price.value,
         taxes: taxes.value,
         ads: ads.value,
         discount: discount.value,
         total: total.innerHTML,
         count: count.value,
-        category: category.value
+        category: category.value.toLowerCase(),
         }
-       if (mood ==="create"){
-        if (newProduct.count > 1) {
-            for (let i = 0; i < newProduct.count ; i++) {
-                dataProduct.push(newProduct)      
+        if (title.value!="" 
+            && price.value!="" 
+            && category.value!="" ){
+            if (mood ==="create"){
+                if (newProduct.count > 1) {
+                    for (let i = 0; i < newProduct.count ; i++) {
+                        dataProduct.push(newProduct) 
+                          
+                    }
+        
+                }
+                else {
+                    dataProduct.push(newProduct)
+                }  
             }
-
+                
+                
+                else{
+                    dataProduct [temp]= newProduct
+                    mood = "create"
+                    submit.innerHTML = "Create"
+                    count.style.display = "block"
+                }
+                clearInputs()   
         }
-        else {
-            dataProduct.push(newProduct)
-        }  
-    }
+       
         
-        
-        else{
-            dataProduct [temp]= newProduct
-            mood = "create"
-            submit.innerHTML = "Create"
-            count.style.display = "block"
-        }
-        
-       // console.log(dataProduct)
         localStorage.setItem('product',JSON.stringify(dataProduct))
-        clearInputs()
+        
         showData()
 
 }
@@ -173,6 +178,8 @@ scroll({top : 0 , behavior : 'smooth'})
 
         }
         search.focus()
+        search.value = '';
+        showData()
         
     };
 
@@ -181,7 +188,7 @@ scroll({top : 0 , behavior : 'smooth'})
     
 if (searchModd=="title"){
     for (let i = 0; i< dataProduct.length; i++) {
-      if (dataProduct[i].title.includes(search.value))
+      if (dataProduct[i].title.includes(search.value.toLowerCase()))
        {
         table += `<tr>
               <td>${i}</td>
@@ -200,7 +207,25 @@ if (searchModd=="title"){
 
 
 } else if (searchModd=="category"){
-    
+    for (let i = 0; i < dataProduct.length; i++) {
+        if(dataProduct[i].category.includes(search.value.toLowerCase())){
+            {
+                table += `<tr>
+                      <td>${i}</td>
+                      <td>${dataProduct[i].title}</td>
+                      <td>${dataProduct[i].price}</td>
+                      <td>${dataProduct[i].taxes}</td>
+                      <td>${dataProduct[i].ads}</td>
+                      <td>${dataProduct[i].discount}</td>
+                      <td>${dataProduct[i].total}</td>
+                      <td>${dataProduct[i].category}</td>
+                      <td><button onclick="updateData(${i})" id="update">update</button></td>
+                      <td><button onclick="deletData(${i})" id="delete">delete</button></td>
+                    </tr>`
+               }
+        }
+        
+    }
 }
 document.getElementById('tbody').innerHTML = table;
 
