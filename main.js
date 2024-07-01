@@ -90,6 +90,7 @@ function clearInputs() {
 // read product
 
  function showData() {
+    getTotal()
 let table =''
 for (let i = 0; i < dataProduct.length; i++) {
   table += `<tr>
@@ -155,5 +156,52 @@ for (let i = 0; i < dataProduct.length; i++) {
       mood = "update"
       temp = i
 scroll({top : 0 , behavior : 'smooth'})
+
+    }
+
+    // search product
+    let searchModd ='title'
+    function getSearchMood(id) {
+       // let search = getElementById("search")
+
+        if (id =="searchTitle"){     
+               searchModd = 'title';
+               search.placeholder = "Search By title " 
+        }  else{
+            searchModd ="category";
+            search.placeholder = "Search By category" 
+
+        }
+        search.focus()
+        
+    };
+
+    function searchData(value) {
+        let table =''
+    
+if (searchModd=="title"){
+    for (let i = 0; i< dataProduct.length; i++) {
+      if (dataProduct[i].title.includes(search.value))
+       {
+        table += `<tr>
+              <td>${i}</td>
+              <td>${dataProduct[i].title}</td>
+              <td>${dataProduct[i].price}</td>
+              <td>${dataProduct[i].taxes}</td>
+              <td>${dataProduct[i].ads}</td>
+              <td>${dataProduct[i].discount}</td>
+              <td>${dataProduct[i].total}</td>
+              <td>${dataProduct[i].category}</td>
+              <td><button onclick="updateData(${i})" id="update">update</button></td>
+              <td><button onclick="deletData(${i})" id="delete">delete</button></td>
+            </tr>`
+       }
+    }
+
+
+} else if (searchModd=="category"){
+    
+}
+document.getElementById('tbody').innerHTML = table;
 
     }
